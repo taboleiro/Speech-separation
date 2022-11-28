@@ -1,6 +1,7 @@
 import os
 import shutil
 import asteroid.metrics as metrics
+from scipy.io import wavfile
 
 def getAllMetrics(mix, clean, est, sample_rate, n_src=2, metrics_list=['si_sdr', 'sdr', 'pesq']):
     """
@@ -24,18 +25,32 @@ def getAllMetrics(mix, clean, est, sample_rate, n_src=2, metrics_list=['si_sdr',
                                                   sample_rate=8000, metrics_list=metrics_list).values())
     return results
 
-def mixSignals(signals, noise, SNR=5):
+def mixSignals(signalsPath, noisepath, SNR=5):
     """
     Mixing speech signals with noise
     input:
-        signals : numpy array, It contains the speech signals (each signal is a row in the array)
-        noise   : numpy array, Noise signal
+        signalsPath : String, contains the path to the signals .wav
+        noisepath   : String, contains the path to the noise .wav
         SNR     : float, desired SNR between signals and noise
     output:
         output  : numpy array, mixed signals
     """
-    signals = np.dot(1/signals.max(axis=1), signals) # Normalizing signals
-    signals = signals/max(signals)
+    signals = []
+    for signal in signalsPath:
+        _, data = wavfile.read(signal)
+        if len(signals) == 0:
+            signals = data
+        else:
+            signals = np.vstack(signals, data)
+    signals = np.array(signals
+                       )
+    _, noise = wavfile.read(noisepath)
+
+    if signals.ndim == 1:
+        signals = signals/signals.max() # Normalizing signals
+    else:
+        signals = np.dot(1/signals.max(axis=1), signals)
+        signals = signals/max(signals)
 
     noise = noise/noise.max()
     noise = noise[:len(signals)]

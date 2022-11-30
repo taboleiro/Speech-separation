@@ -12,6 +12,7 @@ def getAllMetrics(mix, clean, est, sample_rate, n_src=2, metrics_list=['si_sdr',
         est     : Array (n_srcXlen_signal), matrix with the output of the model, estimated signals
         n_src   : Int, number of sources
         metrics : list, Desired metrix values (input-output)
+                  posible values: ["si_sdr", "sdr", "sir", "sar", "stoi", "pesq"]
     outputs:
         results : Matrix, contains the quality params in the order specify in metrics
     """

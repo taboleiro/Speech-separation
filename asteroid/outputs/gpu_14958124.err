@@ -1,0 +1,63 @@
+/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:446: LightningDeprecationWarning: Setting `Trainer(gpus=1)` is deprecated in v1.7 and will be removed in v2.0. Please use `Trainer(accelerator='gpu', devices=1)` instead.
+  rank_zero_deprecation(
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name      | Type           | Params
+---------------------------------------------
+0 | model     | DPRNNTasNet    | 3.7 M 
+1 | loss_func | PITLossWrapper | 0     
+---------------------------------------------
+3.7 M     Trainable params
+0         Non-trainable params
+3.7 M     Total params
+14.611    Total estimated model params size (MB)
+/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:224: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 32 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+Traceback (most recent call last):
+  File "/zhome/5d/4/164964/asteroid/run_model.py", line 38, in <module>
+    trainer.fit(system)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/trainer.py", line 582, in fit
+    call._call_and_handle_interrupt(
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/call.py", line 38, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/trainer.py", line 624, in _fit_impl
+    self._run(model, ckpt_path=self.ckpt_path)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/trainer.py", line 1061, in _run
+    results = self._run_stage()
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/trainer.py", line 1140, in _run_stage
+    self._run_train()
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/trainer.py", line 1153, in _run_train
+    self._run_sanity_check()
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/trainer.py", line 1225, in _run_sanity_check
+    val_loop.run()
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/loops/dataloader/evaluation_loop.py", line 152, in advance
+    dl_outputs = self.epoch_loop.run(self._data_fetcher, dl_max_batches, kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 137, in advance
+    output = self._evaluation_step(**kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 234, in _evaluation_step
+    output = self.trainer._call_strategy_hook(hook_name, *kwargs.values())
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/trainer/trainer.py", line 1443, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/strategies/strategy.py", line 390, in validation_step
+    return self.model.validation_step(*args, **kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroid/engine/system.py", line 130, in validation_step
+    loss = self.common_step(batch, batch_nb, train=False)
+  File "/zhome/5d/4/164964/asteroid/asteroid/engine/system.py", line 102, in common_step
+    loss = self.loss_func(est_targets, targets)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroid/losses/pit_wrapper.py", line 100, in forward
+    pw_losses = self.loss_func(est_targets, targets, **kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/zhome/5d/4/164964/asteroid/asteroid/losses/sdr.py", line 47, in forward
+    raise TypeError(
+TypeError: Inputs must be of shape [batch, n_src, time], got torch.Size([16, 3, 24000]) and torch.Size([16, 2, 24000]) instead

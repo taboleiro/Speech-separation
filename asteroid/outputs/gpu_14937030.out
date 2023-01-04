@@ -1,0 +1,96 @@
+Mon Nov 28 18:47:56 2022       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 520.61.05    Driver Version: 520.61.05    CUDA Version: 11.8     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A100 80G...  On   | 00000000:CA:00.0 Off |                    0 |
+| N/A   27C    P0    41W / 300W |      0MiB / 81920MiB |      0%   E. Process |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 14937030: <new_asteroid_31> in cluster <dcc> Done
+
+Job <new_asteroid_31> was submitted from host <n-62-27-19> by user <s212648> in cluster <dcc> at Mon Nov 28 17:42:36 2022
+Job was executed on host(s) <16*n-62-18-12>, in queue <gpua100>, as user <s212648> in cluster <dcc> at Mon Nov 28 18:47:55 2022
+</zhome/5d/4/164964> was used as the home directory.
+</zhome/5d/4/164964/asteroid> was used as the working directory.
+Started at Mon Nov 28 18:47:55 2022
+Terminated at Mon Nov 28 19:21:19 2022
+Results reported at Mon Nov 28 19:21:19 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -q gpua100
+#BSUB -J new_asteroid_31
+#BSUB -n 16
+#BSUB -R "span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -W 20:00
+#BSUB -R "rusage[mem=8GB]"
+##BSUB -R "select[gpu40gb]" #options gpu40gb or gpu80gb
+#BSUB -o outputs/gpu_%J.out
+#BSUB -e outputs/gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+
+source asteroids/bin/activate
+
+# Options
+# Run main.py --help to get options
+
+#python3 main.py --name ViT-Base --model-type ViT --optim SGD --max-epochs 200 --num-workers 8 --depth 12 --lr 1e-4 --dim 768 --mlp_dim 3072 --heads 12 --patch-size 8 >| outputs/class.out 2>| error/class.err
+#python3 main.py --name ViT-Large --model-type ViT --optim SGD --max-epochs 200 --num-workers 8 --depth 24 --lr 1e-4 --dim 1024 --mlp_dim 4096 --heads 16 --patch-size 8 >| outputs/class.out 2>| error/class.err
+#python3 main.py --name ViT-Huge --model-type ViT --optim SGD --max-epochs 200 --num-workers 8 --depth 32 --lr 1e-4 --dim 1280 --mlp_dim 5120 --heads 16 --patch-size 8 >| outputs/class.out 2>| error/class.err
+
+
+#python3 main.py --name ViTVAE --model-type ViTVAE --max-epochs 100 --num-workers 8 >| outputs/ViTVAE.out 2>| error/ViTVAE.err
+
+#python3 main.py --name ConvCVAE --model-type ConvCVAE --dim 256 --batch_size 64 --max-epochs 100 --num-workers 8 >| outputs/ViTVAE.out 2>| error/ViTVAE.err
+
+#python3 main.py --name ViTCVAE_R --model-type ViTCVAE_R --dim 256 --mlp_dim 256 --batch_size 64 --ngf 32 --max-epochs 100 --num-workers 8 >| outputs/ViTCVAE_R.out 2>| error/ViTCVAE_R.err
+
+python3 run_model.py  >| lightning_log 
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1462.56 sec.
+    Max Memory :                                 2171 MB
+    Average Memory :                             2021.11 MB
+    Total Requested Memory :                     131072.00 MB
+    Delta Memory :                               128901.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                10
+    Run time :                                   2006 sec.
+    Turnaround time :                            5923 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <outputs/gpu_14937030.err> for stderr output of this job.
+

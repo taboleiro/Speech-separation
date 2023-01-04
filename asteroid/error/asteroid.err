@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/zhome/5d/4/164964/asteroid/run_model.py", line 3, in <module>
+    from pytorch_lightning import Trainer
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/pytorch_lightning/__init__.py", line 34, in <module>
+    from lightning_lite.utilities.seed import seed_everything  # noqa: E402
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/__init__.py", line 23, in <module>
+    from lightning_lite.lite import LightningLite  # noqa: E402
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/lite.py", line 29, in <module>
+    from lightning_lite.plugins import Precision  # avoid circular imports: # isort: split
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/plugins/__init__.py", line 14, in <module>
+    from lightning_lite.plugins.environments.cluster_environment import ClusterEnvironment
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/plugins/environments/__init__.py", line 16, in <module>
+    from lightning_lite.plugins.environments.lightning import LightningEnvironment  # noqa: F401
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/plugins/environments/lightning.py", line 19, in <module>
+    from lightning_lite.utilities.rank_zero import rank_zero_only
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/utilities/__init__.py", line 16, in <module>
+    from lightning_lite.utilities.apply_func import move_data_to_device  # noqa: F401
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/utilities/apply_func.py", line 24, in <module>
+    from lightning_lite.utilities.types import _DEVICE
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/utilities/types.py", line 22, in <module>
+    from lightning_lite.utilities.imports import _TORCH_GREATER_EQUAL_1_13
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_lite/utilities/imports.py", line 19, in <module>
+    from lightning_utilities.core.imports import compare_version
+  File "/zhome/5d/4/164964/asteroid/asteroids/lib/python3.9/site-packages/lightning_utilities/core/imports.py", line 10, in <module>
+    import pkg_resources
+ModuleNotFoundError: No module named 'pkg_resources'
